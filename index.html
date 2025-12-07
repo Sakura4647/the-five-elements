@@ -44,15 +44,6 @@
         }
         .animate-fade-in { animation: fadeIn 0.5s ease-out forwards; }
     </style>
-<script type="importmap">
-{
-  "imports": {
-    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.556.0",
-    "react": "https://aistudiocdn.com/react@^19.2.1",
-    "react/": "https://aistudiocdn.com/react@^19.2.1/"
-  }
-}
-</script>
 </head>
 <body class="bg-stone-100 text-stone-800 font-sans antialiased selection:bg-stone-300 selection:text-stone-900 min-h-screen flex flex-col bg-[#f3eee3]">
 
@@ -61,10 +52,10 @@
 
     <!-- Header -->
     <header class="pt-12 pb-6 px-4 text-center">
-        <h1 class="text-3xl md:text-4xl font-serif text-stone-600 tracking-[0.2em] mb-3">
+        <h1 class="text-3xl md:text-4xl font-serif font-bold text-stone-700 tracking-[0.2em] mb-3">
             玩轉五行
         </h1>
-        <p class="text-sm md:text-base text-stone-500 font-light tracking-widest">
+        <p class="text-sm md:text-base text-stone-600 font-medium tracking-widest">
             循著五行流轉，探索你的身心節奏
         </p>
     </header>
@@ -163,9 +154,13 @@
                 const isActive = tab.id === activeTabId;
                 
                 // Create button
+                // Updates:
+                // 1. shrink-0: Prevents squeezing on mobile
+                // 2. min-w-[110px]: Ensures consistent base width
+                // 3. px/py: Adjusted for mobile (px-3 py-3) and desktop (md:px-4 md:py-5)
                 const button = document.createElement('button');
                 button.className = `
-                    relative flex flex-col items-center justify-center min-w-[100px] px-4 py-4 md:py-6 transition-all duration-300 ease-in-out group outline-none
+                    relative flex flex-col items-center justify-center min-w-[110px] px-3 py-3 md:px-4 md:py-5 transition-all duration-300 ease-in-out group outline-none shrink-0
                     ${isActive ? 'text-stone-800' : 'text-stone-400 hover:text-stone-600'}
                 `;
                 button.setAttribute('role', 'tab');
@@ -188,8 +183,15 @@
                 iconDiv.innerHTML = `<i data-lucide="${tab.iconName}" width="24" height="24" class="${isActive ? 'stroke-2' : 'stroke-[1.5]'}"></i>`;
                 
                 // Label
+                // Updates:
+                // 1. Text sizes: text-xs (mobile) -> sm:text-sm -> md:text-base
+                // 2. Font weight: font-medium (default) -> font-semibold (active)
+                // 3. Removed whitespace-nowrap, added leading-tight text-center
                 const span = document.createElement('span');
-                span.className = `text-sm md:text-base font-medium whitespace-nowrap ${isActive ? 'font-bold' : ''}`;
+                span.className = `
+                    text-xs sm:text-sm md:text-base font-medium leading-tight text-center
+                    ${isActive ? 'font-semibold' : ''}
+                `;
                 span.textContent = tab.title;
 
                 button.appendChild(iconDiv);

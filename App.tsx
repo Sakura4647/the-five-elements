@@ -1,1 +1,1 @@
-// This file is no longer used. Logic has been moved to index.html for a vanilla JS implementation.
+// Unused
