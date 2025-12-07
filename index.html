@@ -214,66 +214,55 @@
         function renderContent() {
             const tab = TABS.find(t => t.id === activeTabId) || TABS[0];
             
-            let htmlContent = '';
-
-            // Check if it is the "Energy" tab (Second tab)
+            // Special logic for the second tab (Energy)
             if (tab.id === 'energy') {
-                 htmlContent = `
-                    <div class="animate-fade-in">
-                        <article class="bg-sand-100/80 border border-stone-200 rounded-3xl shadow-sm p-4 md:p-6">
-                            <div class="max-w-md md:max-w-2xl mx-auto">
-                                <figure class="w-full">
-                                    <img
-                                        src="https://img.shoplineapp.com/media/image_clips/6935a3041d7479000c26f545/original.jpg?1765122815=&owner_id=5caf39294d91a10001727c79"
-                                        alt="${tab.title}"
-                                        class="w-full h-auto rounded-2xl shadow"
-                                        style="aspect-ratio: 6792/11812;"
-                                    >
-                                </figure>
-                            </div>
-                        </article>
+                 contentContainer.innerHTML = `
+                    <div class="w-full animate-fade-in">
+                        <img
+                            src="https://img.shoplineapp.com/media/image_clips/6935a3041d7479000c26f545/original.jpg?1765122815=&owner_id=5caf39294d91a10001727c79"
+                            alt="看見你的五行能量"
+                            class="w-full h-auto block"
+                        />
                     </div>
                 `;
-            } else {
-                // Default content for other tabs
-                htmlContent = `
-                    <div class="animate-fade-in">
-                        <div class="bg-white rounded-2xl shadow-xl border border-stone-200 overflow-hidden">
-                            <!-- Header Section -->
-                            <div class="bg-stone-50 px-8 py-10 border-b border-stone-100 text-center">
-                                <h2 class="text-3xl md:text-4xl font-serif text-stone-800 mb-4 tracking-wide">
-                                    ${tab.title}
-                                </h2>
-                                <p class="text-stone-500 max-w-xl mx-auto leading-relaxed">
-                                    ${tab.description}
-                                </p>
-                            </div>
+                return;
+            }
 
-                            <!-- Content Placeholder Area -->
-                            <div class="p-8 md:p-12">
-                                <div class="w-full aspect-[16/9] md:aspect-[21/9] border-2 border-dashed border-stone-300 rounded-xl bg-stone-50 flex flex-col items-center justify-center gap-4 text-stone-400 transition-colors hover:border-stone-400 hover:bg-stone-100 cursor-default">
-                                    <div class="p-4 bg-white rounded-full shadow-sm">
-                                        <i data-lucide="image" width="48" height="48" stroke-width="1"></i>
-                                    </div>
-                                    <p class="text-lg font-medium tracking-widest uppercase">
-                                        ${tab.placeholderText}
-                                    </p>
-                                    <p class="text-xs text-stone-300">Placeholder Area</p>
+            // Default content for other tabs
+            contentContainer.innerHTML = `
+                <div class="animate-fade-in">
+                    <div class="bg-white rounded-2xl shadow-xl border border-stone-200 overflow-hidden">
+                        <!-- Header Section -->
+                        <div class="bg-stone-50 px-8 py-10 border-b border-stone-100 text-center">
+                            <h2 class="text-3xl md:text-4xl font-serif text-stone-800 mb-4 tracking-wide">
+                                ${tab.title}
+                            </h2>
+                            <p class="text-stone-500 max-w-xl mx-auto leading-relaxed">
+                                ${tab.description}
+                            </p>
+                        </div>
+
+                        <!-- Content Placeholder Area -->
+                        <div class="p-8 md:p-12">
+                            <div class="w-full aspect-[16/9] md:aspect-[21/9] border-2 border-dashed border-stone-300 rounded-xl bg-stone-50 flex flex-col items-center justify-center gap-4 text-stone-400 transition-colors hover:border-stone-400 hover:bg-stone-100 cursor-default">
+                                <div class="p-4 bg-white rounded-full shadow-sm">
+                                    <i data-lucide="image" width="48" height="48" stroke-width="1"></i>
                                 </div>
-                                
-                                <div class="mt-8 space-y-4">
-                                    <div class="h-4 bg-stone-100 rounded w-3/4 mx-auto"></div>
-                                    <div class="h-4 bg-stone-100 rounded w-2/3 mx-auto"></div>
-                                    <div class="h-4 bg-stone-100 rounded w-1/2 mx-auto"></div>
-                                </div>
+                                <p class="text-lg font-medium tracking-widest uppercase">
+                                    ${tab.placeholderText}
+                                </p>
+                                <p class="text-xs text-stone-300">Placeholder Area</p>
+                            </div>
+                            
+                            <div class="mt-8 space-y-4">
+                                <div class="h-4 bg-stone-100 rounded w-3/4 mx-auto"></div>
+                                <div class="h-4 bg-stone-100 rounded w-2/3 mx-auto"></div>
+                                <div class="h-4 bg-stone-100 rounded w-1/2 mx-auto"></div>
                             </div>
                         </div>
                     </div>
-                `;
-            }
-            
-            // Inject HTML content
-            contentContainer.innerHTML = htmlContent;
+                </div>
+            `;
             
             // Refresh icons in content area
             if (window.lucide) window.lucide.createIcons();
